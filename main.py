@@ -15,8 +15,13 @@ def main():
 
         print(f"Scraping {len(links_to_scrape)} pages from '{i}'...")
     
-        for link in tqdm(links_to_scrape, unit="page"):
-            success = orchestrator.scrape_single_page(link, i)
+        for link_data in tqdm(links_to_scrape, unit="page"):
+            if isinstance(link_data, (list, tuple)):
+                link, thread_activity = link_data
+            else:
+                link, thread_activity = link_data, None
+
+            success = orchestrator.scrape_single_page(link, i, thread_activity=thread_activity)
             if not success:
                 tqdm.write(f"Error when scraping: {link}")
 

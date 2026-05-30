@@ -58,6 +58,9 @@ def get_thread_date(thread):
             thread_dates.append(parsed_date)
     return max(thread_dates) if thread_dates else None
 
+def format_thread_activity(thread_date):
+    return thread_date.strftime(date_format) if thread_date is not None else None
+
 def is_in_date_range(thread_date, start_date, end_date):
     if thread_date is None:
         return True
@@ -95,8 +98,9 @@ def scrape_link_list(forum_url, n_pages, fetcher, start_date=None, end_date=None
                 max_pages_html = t.find("span", {"class": "structItem-pageJump"})
                 max_pages = int(max_pages_html.findAll("a")[-1].text) if max_pages_html else 1
 
+                thread_activity = format_thread_activity(thread_date)
                 for k in range(1, max_pages + 1):
-                    return_links.append(f"{base_link}page-{k}")
+                    return_links.append((f"{base_link}page-{k}", thread_activity))
             except Exception as e:
                 print(f"\nError while parsing thread on page: {i}: {e}")
                 continue

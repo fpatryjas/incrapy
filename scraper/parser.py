@@ -35,7 +35,7 @@ class Parser:
         message_blocks = soup.select(selectors["thread_blocks"])
         return 1 if len(message_blocks) < 2 else 0
 
-    def parse_comments(self, soup, title, table_name, thread_id=0):
+    def parse_comments(self, soup, title, table_name, thread_id=0, thread_activity=None):
         articles = soup.select(selectors["articles"])
         if not articles: return []
 
@@ -82,7 +82,7 @@ class Parser:
                     quoted_user, quoted_user_id = None, None
 
                 posts_data.append((
-                    title, thread_id, user_id, user_name, user_title, rank, n_stars,
+                    title, thread_id, thread_activity, user_id, user_name, user_title, rank, n_stars,
                     date, n_posts, time_online, datetime_op, n_post, message,
                     quote_host, quote_url, quoted_user, quoted_user_id
                 ))
@@ -91,7 +91,7 @@ class Parser:
                 continue
         return posts_data
 
-    def scrape_op(self, soup_block):
+    def scrape_op(self, soup_block, thread_activity=None):
         try:
             html_tag = soup_block.find_parent("html")
             thread_id = self.int_from_txt(soup_block["data-lb-id"]) if soup_block.has_attr("data-lb-id") else 0
@@ -121,7 +121,7 @@ class Parser:
             except:
                 quoted_user, quoted_user_id = None, None
 
-            return [thread_id, user_id, username, user_title, rank, n_stars, None, None, None, datetime_op, 1, text_op, quote_host, quote_url, quoted_user, quoted_user_id]
+            return [thread_id, thread_activity, user_id, username, user_title, rank, n_stars, None, None, None, datetime_op, 1, text_op, quote_host, quote_url, quoted_user, quoted_user_id]
         except Exception as e:
             print(f"Error while scraping OP thread: {e}")
             return None

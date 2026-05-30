@@ -12,7 +12,7 @@ class DatabaseManager:
     def _init_tables(self):
         tables = ["must_read", "off_topic", "inceldom"]
         schema = '''(
-            title TEXT, thread_id INT, user_id INT, user_name TEXT,
+            title TEXT, thread_id INT, latest_activity TEXT, user_id INT, user_name TEXT,
             user_title TEXT, rank TEXT, n_stars INT, date TEXT, n_posts INT,
             time_online TEXT, datetime DATE, n_post INT, message TEXT,
             quote_host TEXT, quote_url TEXT, quoted_user TEXT, qu_id TEXT
@@ -23,7 +23,7 @@ class DatabaseManager:
         self.conn.commit()
 
     def insert_post(self, table_name, data_tuple):
-        query = f"INSERT INTO {table_name} VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        query = f"INSERT INTO {table_name} VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
         try:
             self.cursor.execute(query, data_tuple)
             self.conn.commit()

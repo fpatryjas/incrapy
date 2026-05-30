@@ -11,7 +11,7 @@ class ForumOrchestrator:
         self.db = DatabaseManager()
         self.faulty_links = []
 
-    def scrape_single_page(self, url_path, table_name):
+    def scrape_single_page(self, url_path, table_name, thread_activity=None):
         full_url = url_path if url_path.startswith("http") else f"{forum}{url_path}"
         
         html = self.fetcher.get_html(full_url)
@@ -28,7 +28,7 @@ class ForumOrchestrator:
             thread_type = self.parser.get_thread_type(soup)
             
             if thread_type == 1:
-                posts = self.parser.parse_comments(soup, title, table_name, thread_id=0)
+                posts = self.parser.parse_comments(soup, title, table_name, thread_id=0, thread_activity=thread_activity)
                 for post in posts:
                     self.db.insert_post(table_name, post)
             
@@ -36,12 +36,12 @@ class ForumOrchestrator:
                 message_blocks = soup.select(selectors["thread_blocks"])
                 op_block = message_blocks[0]
                 
-                op_data = self.parser.scrape_op(op_block)
+                op_data = self.parser.scrape_op(op_block, thread_activity=thread_activity)
                 if op_data:
                     full_op_data = tuple([title] + op_data)
                     self.db.insert_post(table_name, full_op_data)
                     
-                    posts = self.parser.parse_comments(message_blocks[1], title, table_name, thread_id=op_data[0])
+                    posts = self.parser.parse_comments(message_blocks[1], title, table_name, thread_id=op_data[0], thread_activity=thread_activity)
                     for post in posts:
                         self.db.insert_post(table_name, post)
             
