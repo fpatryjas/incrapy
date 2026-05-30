@@ -5,7 +5,7 @@ from scraper.orchestrator import ForumOrchestrator
 def main():
     orchestrator = ForumOrchestrator()
     
-    to_scrape = ["must_read", "off_topic", "inceldom"]
+    to_scrape = ["inceldom"]
 
     for i in to_scrape:
         links = f"links/{i}.pkl"

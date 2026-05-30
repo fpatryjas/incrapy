@@ -10,7 +10,7 @@ class DatabaseManager:
         self._init_tables()
 
     def _init_tables(self):
-        tables = ["must_read", "off_topic", "inceldom"]
+        tables = ["inceldom"]
         schema = '''(
             title TEXT, thread_id INT, latest_activity TEXT, user_id INT, user_name TEXT,
             user_title TEXT, rank TEXT, n_stars INT, date TEXT, n_posts INT,

@@ -13,8 +13,6 @@ startdate = None
 enddate = None
 
 subforums = { # Page numbers as of 30.05.2026
-    "must_read": {"url": "https://incels.is/forums/must-read-content.23/", "pages": 4},
-    "off_topic": {"url": "https://incels.is/forums/the-lounge.4/", "pages": 2795},
     "inceldom": {"url": "https://incels.is/forums/inceldom-discussion.2/", "pages": 3854}
 }
 
