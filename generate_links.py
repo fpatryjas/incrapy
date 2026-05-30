@@ -7,10 +7,10 @@ from scraper.fetcher import Fetcher
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-subforums = { # Page numbers as of 29.05.2026
+subforums = { # Page numbers as of 30.05.2026
     "must_read": {"url": "https://incels.is/forums/must-read-content.23/", "pages": 4},
-    "off_topic": {"url": "https://incels.is/forums/the-lounge.4/", "pages": 2794},
-    "inceldom": {"url": "https://incels.is/forums/inceldom-discussion.2/", "pages": 3853}
+    "off_topic": {"url": "https://incels.is/forums/the-lounge.4/", "pages": 2795},
+    "inceldom": {"url": "https://incels.is/forums/inceldom-discussion.2/", "pages": 3854}
 }
 
 def scrape_link_list(forum_url, n_pages, fetcher):
