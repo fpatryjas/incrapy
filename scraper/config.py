@@ -9,6 +9,8 @@ agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, li
 min_d = 0.2
 max_d = 0.4
 timeout = 60
+retry_attempts = 3
+retry_backoff = 2
 
 selectors = {
     "thread_blocks": "div.block--messages",
