@@ -1,7 +1,7 @@
 import requests
 import time
 import random
-from scraper.config import agent, min_d, max_d
+from scraper.config import agent, min_d, max_d, timeout
 
 class Fetcher:
     def __init__(self):
@@ -13,7 +13,7 @@ class Fetcher:
         time.sleep(delay)
         
         try:
-            response = self.session.get(url, timeout=15)
+            response = self.session.get(url, timeout=timeout)
             response.raise_for_status()
             return response.content
         except requests.exceptions.RequestException as e:

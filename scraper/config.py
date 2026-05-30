@@ -8,6 +8,7 @@ forum = "https://incels.is"
 agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
 min_d = 1.5
 max_d = 3.5
+timeout = 15
 
 selectors = {
     "thread_blocks": "div.block--messages",
