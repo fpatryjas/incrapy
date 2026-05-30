@@ -45,6 +45,8 @@ class ForumOrchestrator:
                     for post in posts:
                         self.db.insert_post(table_name, post)
             
+            self.db.mark_scraped(url_path)
+            self.db.commit()
             return True
         except AttributeError:
             self.faulty_links.append(url_path)

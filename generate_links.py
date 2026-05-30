@@ -128,7 +128,7 @@ def scrape_link_list(forum_url, n_pages, fetcher, start_date=None, end_date=None
             newest_activity = max(page_activities)
             print(
                 f"Stopping at page {i}: "
-                f"Newest thread date {newest_activity:%d.%m.%Y} is before {startdate}."
+                f"Newest thread date {newest_activity:%d.%m.%Y} is before {start_date:%d.%m.%Y}."
             )
             break
 

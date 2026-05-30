@@ -25,3 +25,5 @@ selectors = {
     "blockquote": "blockquote",
     "title": "div.p-title"
 }
+
+known_subforums = ["inceldom"]

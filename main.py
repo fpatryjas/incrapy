@@ -1,11 +1,12 @@
 import pickle
 from tqdm import tqdm
 from scraper.orchestrator import ForumOrchestrator
+from scraper.config import known_subforums
 
 def main():
     orchestrator = ForumOrchestrator()
-    
-    to_scrape = ["inceldom"]
+
+    to_scrape = known_subforums
 
     for i in to_scrape:
         links = f"links/{i}.pkl"
@@ -13,8 +14,13 @@ def main():
         with open(links, 'rb') as f:
             links_to_scrape = pickle.load(f)
 
-        print(f"Scraping {len(links_to_scrape)} pages from '{i}'...")
-    
+        scraped = orchestrator.db.get_scraped_urls()
+        if scraped:
+            links_to_scrape = [l for l in links_to_scrape if (l[0] if isinstance(l, (list, tuple)) else l) not in scraped]
+            print(f"Resuming: {len(scraped)} pages already done, {len(links_to_scrape)} remaining.")
+        else:
+            print(f"Scraping {len(links_to_scrape)} pages from '{i}'...")
+
         for link_data in tqdm(links_to_scrape, unit="page"):
             if isinstance(link_data, (list, tuple)):
                 link, thread_activity = link_data
