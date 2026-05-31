@@ -12,8 +12,8 @@ date_format = "%d.%m.%Y"
 startdate = None
 enddate = None
 
-subforums = { # Page numbers as of 30.05.2026
-    "inceldom": {"url": "https://incels.is/forums/inceldom-discussion.2/", "pages": 3854}
+subforums = { # Page numbers as of 31.05.2026
+    "inceldom": {"url": "https://incels.is/forums/inceldom-discussion.2/", "pages": 3855}
 }
 
 def parse_date_filter(date_value, variable_name):
